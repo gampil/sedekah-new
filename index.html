@@ -1,17 +1,517 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sedekah Subuh Haramain - Donasi untuk Tanah Suci</title>
-    <meta name="description" content="Program Sedekah Subuh untuk pembangunan dan operasional di Masjidil Haram & Masjid Nabawi. Mari berbagi kebaikan setiap subuh." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sedekah Subuh Haramain - Donasi untuk Tanah Suci</title>
+  <meta name="description" content="Program Sedekah Subuh untuk pembangunan dan operasional di Masjidil Haram & Masjid Nabawi. Mari berbagi kebaikan setiap subuh." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <i class="fas fa-mosque"></i>
+        </div>
+        <div>
+          <h1>Sedekah Subuh</h1>
+          <p>Haramain</p>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#donasi">Donasi</a>
+        <a href="#donatur">Donatur</a>
+        <a href="#tentang">Tentang</a>
+        <button class="btn-admin" onclick="showAdmin()" title="Admin Panel">
+          <i class="fas fa-lock"></i>
+        </button>
+        <a href="#donasi" class="btn-cta-nav">Donasi Sekarang</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#donasi" onclick="closeMobileMenu()">Donasi</a>
+      <a href="#donatur" onclick="closeMobileMenu()">Donatur</a>
+      <a href="#tentang" onclick="closeMobileMenu()">Tentang</a>
+      <button class="btn-admin" onclick="showAdmin(); closeMobileMenu();">
+        <i class="fas fa-lock"></i> Admin
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    
+    <div class="hero-content">
+      <div class="hero-grid">
+        <div class="hero-text animate-fade-in-up">
+          <div class="hero-badge">
+            <i class="fas fa-star"></i>
+            <span>Program Sedekah Subuh</span>
+          </div>
+          
+          <p class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+          
+          <h1 class="hero-title">
+            Sedekah Subuh
+            <span class="text-gold">Haramain</span>
+          </h1>
+          
+          <p class="hero-desc">
+            Mari amalkan sedekah subuh untuk pembangunan dan operasional di dua tanah suci, 
+            Masjidil Haram & Masjid Nabawi. Setiap subuh, setiap kebaikan dicatat.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#donasi" class="btn-primary-hero">
+              <i class="fas fa-hand-holding-heart"></i>
+              Donasi Sekarang
+            </a>
+            <a href="#tentang" class="btn-glass">
+              <i class="fas fa-info-circle"></i>
+              Pelajari Lebih
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-card-wrapper animate-float">
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <div class="card-icon-large">
+                <i class="fas fa-mosque"></i>
+              </div>
+              <h3>Total Terkumpul</h3>
+              <p class="card-amount" id="totalAmount">Rp 0</p>
+              <p class="card-donors"><span id="totalDonors">0</span> Donatur</p>
+            </div>
+            
+            <div class="card-targets">
+              <div class="target-item">
+                <div class="target-icon">
+                  <i class="fas fa-kaaba"></i>
+                </div>
+                <p>Masjidil Haram</p>
+              </div>
+              <div class="target-item">
+                <div class="target-icon">
+                  <i class="fas fa-mosque"></i>
+                </div>
+                <p>Masjid Nabawi</p>
+              </div>
+              <div class="target-item">
+                <div class="target-icon">
+                  <i class="fas fa-quran"></i>
+                </div>
+                <p>Wakaf Quran</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card stat-blue">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <p class="stat-number" id="statDonors">0+</p>
+          <p class="stat-label">Donatur</p>
+        </div>
+        <div class="stat-card stat-green">
+          <div class="stat-icon">
+            <i class="fas fa-hand-holding-usd"></i>
+          </div>
+          <p class="stat-number" id="statAmount">Rp 0</p>
+          <p class="stat-label">Terkumpul</p>
+        </div>
+        <div class="stat-card stat-gold">
+          <div class="stat-icon">
+            <i class="fas fa-mosque"></i>
+          </div>
+          <p class="stat-number">2</p>
+          <p class="stat-label">Masjid Target</p>
+        </div>
+        <div class="stat-card stat-purple">
+          <div class="stat-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <p class="stat-number">365</p>
+          <p class="stat-label">Hari/Tahun</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="tentang" class="about-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Tentang Program</span>
+        <h2>Mengapa Sedekah Subuh?</h2>
+        <p>Sedekah subuh adalah amalan yang sangat istimewa. Rasulullah SAW bersabda bahwa sedekah di pagi hari memiliki keutamaan yang besar.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-blue">
+            <i class="fas fa-sun"></i>
+          </div>
+          <h3>Keutamaan Subuh</h3>
+          <p>"Ya Allah, berkahilah umatku di waktu paginya" (HR. Abu Dawud). Sedekah di waktu subuh mendapat keberkahan khusus dari Allah SWT.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-gold">
+            <i class="fas fa-mosque"></i>
+          </div>
+          <h3>Tanah Suci</h3>
+          <p>Donasi disalurkan untuk pembangunan dan operasional di Masjidil Haram (Makkah) dan Masjid Nabawi (Madinah) - dua masjid terbaik di dunia.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-green">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3>Transparan</h3>
+          <p>Setiap donasi tercatat dan dilaporkan secara transparan. Bukti penyaluran akan diupdate secara berkala untuk para donatur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation Form Section -->
+  <section id="donasi" class="donation-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Form Donasi</span>
+        <h2>Sudah Berbagi Hari Ini?</h2>
+        <p>Isi form di bawah ini untuk menyalurkan sedekah subuh Anda. Setelah transfer, upload bukti pembayaran untuk verifikasi.</p>
+      </div>
+
+      <div class="donation-grid">
+        <!-- Form -->
+        <div class="form-card">
+          <form id="donationForm" onsubmit="handleDonation(event)">
+            <div class="form-group">
+              <label>Nama Lengkap *</label>
+              <input type="text" id="donorName" required placeholder="Masukkan nama lengkap" />
+            </div>
+
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="donorEmail" placeholder="email@contoh.com" />
+            </div>
+
+            <div class="form-group">
+              <label>Jumlah Donasi *</label>
+              <div class="amount-presets">
+                <button type="button" onclick="setAmount(25000)" class="preset-btn">Rp 25.000</button>
+                <button type="button" onclick="setAmount(50000)" class="preset-btn">Rp 50.000</button>
+                <button type="button" onclick="setAmount(100000)" class="preset-btn">Rp 100.000</button>
+                <button type="button" onclick="setAmount(250000)" class="preset-btn">Rp 250.000</button>
+                <button type="button" onclick="setAmount(500000)" class="preset-btn">Rp 500.000</button>
+                <button type="button" onclick="setAmount(1000000)" class="preset-btn">Rp 1.000.000</button>
+              </div>
+              <input type="number" id="donorAmount" required min="1000" placeholder="Atau masukkan jumlah lain (min. Rp 1.000)" />
+            </div>
+
+            <div class="form-group">
+              <label>Metode Pembayaran *</label>
+              <select id="paymentMethod" required>
+                <option value="BSI">Bank Syariah Indonesia (BSI)</option>
+                <option value="Muamalat">Bank Muamalat</option>
+                <option value="QRIS">QRIS</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Doa / Pesan</label>
+              <textarea id="donorMessage" rows="3" placeholder="Tuliskan doa atau pesan Anda (opsional)"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Bukti Transfer *</label>
+              <div class="upload-area" id="uploadArea">
+                <input type="file" id="proofFile" accept="image/*" onchange="handleFileSelect(event)" required />
+                <div class="upload-content" id="uploadContent">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>Klik atau drag file untuk upload bukti transfer</p>
+                  <span>Format: JPG, PNG (Max 5MB)</span>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+              <i class="fas fa-paper-plane"></i>
+              <span>Kirim Donasi</span>
+            </button>
+          </form>
+
+          <!-- Success Message -->
+          <div class="success-message" id="successMessage" style="display:none;">
+            <div class="success-icon">
+              <i class="fas fa-check"></i>
+            </div>
+            <h3>Donasi Berhasil Dikirim!</h3>
+            <p>Terima kasih atas donasi Anda. Admin akan memverifikasi dalam 1x24 jam.</p>
+            <button onclick="resetForm()" class="btn-link">Kirim Donasi Lagi</button>
+          </div>
+        </div>
+
+        <!-- Payment Info -->
+        <div class="payment-info">
+          <div class="payment-card">
+            <h3><i class="fas fa-university"></i> Metode Pembayaran</h3>
+            
+            <div class="payment-method">
+              <div class="payment-header">
+                <span>Bank Syariah Indonesia (BSI)</span>
+                <span class="badge-active">Aktif</span>
+              </div>
+              <p class="account-number">7123 4567 890</p>
+              <p class="account-name">a.n. Yayasan Sedekah Subuh Haramain</p>
+            </div>
+
+            <div class="payment-method">
+              <div class="payment-header">
+                <span>Bank Muamalat</span>
+                <span class="badge-active">Aktif</span>
+              </div>
+              <p class="account-number">3012 3456 789</p>
+              <p class="account-name">a.n. Yayasan Sedekah Subuh Haramain</p>
+            </div>
+
+            <div class="payment-method">
+              <div class="payment-header">
+                <span>QRIS</span>
+                <span class="badge-active">Aktif</span>
+              </div>
+              <p class="qr-description">Scan QR Code untuk pembayaran digital</p>
+              <div class="qr-placeholder">
+                <i class="fas fa-qrcode"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="confirm-card">
+            <div class="confirm-header">
+              <i class="fas fa-shield-alt"></i>
+              <h4>Konfirmasi Donasi</h4>
+            </div>
+            <p>Setelah melakukan transfer, silakan upload bukti pembayaran melalui form di samping. Admin akan memverifikasi dalam 1x24 jam.</p>
+            <div class="confirm-contact">
+              <i class="fab fa-whatsapp"></i>
+              <span>Konfirmasi via WhatsApp: 0812-xxxx-xxxx</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donors Section -->
+  <section id="donatur" class="donors-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Donatur</span>
+        <h2>Doa-Doa Orang Baik</h2>
+        <p>Terima kasih kepada seluruh donatur yang telah berpartisipasi dalam program Sedekah Subuh Haramain.</p>
+      </div>
+
+      <div class="donors-grid" id="donorsGrid">
+        <div class="donors-loading">
+          <div class="spinner"></div>
+          <p>Memuat data donatur...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="container cta-content">
+      <p class="cta-arabic">مَّن ذَا الَّذِي يُقْرِضُ اللَّهَ قَرْضًا حَسَنًا فَيُضَاعِفَهُ لَهُ أَضْعَافًا كَثِيرَةً</p>
+      <p class="cta-translation">"Siapakah yang mau memberi pinjaman kepada Allah, pinjaman yang baik (menafkahkan hartanya di jalan Allah), maka Allah akan meperlipat gandakan pembayaran kepadanya dengan lipat ganda yang banyak." (QS. Al-Baqarah: 245)</p>
+      <a href="#donasi" class="btn-primary-hero">
+        <i class="fas fa-hand-holding-heart"></i>
+        Donasi Sekarang
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-brand">
+            <div class="brand-icon">
+              <i class="fas fa-mosque"></i>
+            </div>
+            <div>
+              <h3>Sedekah Subuh Haramain</h3>
+            </div>
+          </div>
+          <p>Program sedekah subuh untuk pembangunan dan operasional di dua tanah suci.</p>
+        </div>
+        <div class="footer-contact">
+          <h4>Kontak</h4>
+          <p><i class="fas fa-envelope"></i> info@sedekahsubuhharamain.com</p>
+          <p><i class="fas fa-phone"></i> 0812-xxxx-xxxx</p>
+          <p><i class="fab fa-whatsapp"></i> 0812-xxxx-xxxx</p>
+        </div>
+        <div class="footer-social">
+          <h4>Ikuti Kami</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Sedekah Subuh Haramain. Semua hak dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin Panel Modal -->
+  <div class="admin-overlay" id="adminOverlay" style="display:none;">
+    <!-- Login Screen -->
+    <div class="admin-login" id="adminLogin">
+      <div class="login-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h2>Admin Panel</h2>
+      <p>Masukkan password untuk mengakses</p>
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="form-error" id="loginError" style="display:none;">Password salah!</div>
+        <input type="password" id="adminPassword" placeholder="Password admin" required />
+        <button type="submit" class="btn-submit">Masuk</button>
+      </form>
+      <button class="btn-back" onclick="closeAdmin()">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+      </button>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="adminDashboard" style="display:none;">
+      <header class="admin-header">
+        <div class="admin-brand">
+          <div class="brand-icon">
+            <i class="fas fa-mosque"></i>
+          </div>
+          <div>
+            <h1>Admin Panel</h1>
+            <p>Sedekah Subuh Haramain</p>
+          </div>
+        </div>
+        <div class="admin-actions">
+          <span class="pending-badge">
+            <i class="fas fa-bell"></i>
+            <span id="pendingCount">0</span> pending
+          </span>
+          <button onclick="closeAdmin()" class="btn-back-small">
+            <i class="fas fa-external-link-alt"></i> Lihat Website
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-main">
+        <div class="admin-stats">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon yellow">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div>
+              <p class="admin-stat-number" id="adminPending">0</p>
+              <p class="admin-stat-label">Menunggu</p>
+            </div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon green">
+              <i class="fas fa-check"></i>
+            </div>
+            <div>
+              <p class="admin-stat-number" id="adminApproved">0</p>
+              <p class="admin-stat-label">Disetujui</p>
+            </div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon red">
+              <i class="fas fa-times"></i>
+            </div>
+            <div>
+              <p class="admin-stat-number" id="adminRejected">0</p>
+              <p class="admin-stat-label">Ditolak</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-list">
+          <div class="admin-list-header">
+            <h2><i class="fas fa-list"></i> Daftar Donasi</h2>
+          </div>
+          <div class="admin-list-body" id="adminDonationList">
+            <div class="empty-state">
+              <i class="fas fa-inbox"></i>
+              <p>Belum ada donasi masuk</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-config">
+          <h3><i class="fas fa-cog"></i> Konfigurasi Integrasi</h3>
+          <div class="config-grid">
+            <div class="config-item">
+              <i class="fab fa-telegram"></i>
+              <span>Telegram Bot: <span id="configTelegram">⚠️ Belum dikonfigurasi</span></span>
+            </div>
+            <div class="config-item">
+              <i class="fas fa-database"></i>
+              <span>Firebase RTDB: <span id="configFirebase">⚠️ Belum dikonfigurasi</span></span>
+            </div>
+            <div class="config-item">
+              <i class="fas fa-image"></i>
+              <span>ImgBB API: <span id="configImgbb">⚠️ Belum dikonfigurasi</span></span>
+            </div>
+            <div class="config-item">
+              <i class="fas fa-envelope"></i>
+              <span>Email Service: <span id="configEmail">⚠️ Belum dikonfigurasi</span></span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Main JavaScript -->
+  <script type="module" src="./src/main.js"></script>
+</body>
 </html>

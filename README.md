@@ -2,6 +2,8 @@
 
 Website donasi Sedekah Subuh untuk pembangunan dan operasional di Masjidil Haram & Masjid Nabawi.
 
+**Dibuat dengan HTML, CSS, dan JavaScript murni (vanilla) - tanpa framework!**
+
 ## ✨ Fitur
 
 - 🎨 **Clean & Responsive Design** - Tampilan profesional dengan aksen warna biru
@@ -12,6 +14,17 @@ Website donasi Sedekah Subuh untuk pembangunan dan operasional di Masjidil Haram
 - 🖼️ **ImgBB API** - Upload bukti transfer ke ImgBB
 - 🔐 **Admin Panel** - Dashboard untuk approve/reject donasi
 - 📱 **Mobile First** - Responsive di semua perangkat
+
+## 📁 Struktur File
+
+```
+├── index.html          # Halaman utama (HTML)
+├── src/
+│   ├── style.css       # Semua styling (CSS)
+│   └── main.js         # Semua logic & integrasi (JavaScript)
+├── .env.example        # Template konfigurasi
+└── README.md           # Dokumentasi
+```
 
 ## 🚀 Setup & Konfigurasi
 
@@ -30,7 +43,7 @@ Website donasi Sedekah Subuh untuk pembangunan dan operasional di Masjidil Haram
   }
 }
 ```
-4. Salin konfigurasi Firebase ke `.env`
+4. Salin konfigurasi Firebase ke `src/main.js` di bagian `CONFIG.firebase`
 
 ### 2. Telegram Bot (BotFather)
 
@@ -41,13 +54,13 @@ Website donasi Sedekah Subuh untuk pembangunan dan operasional di Masjidil Haram
    - Kirim pesan ke bot Anda
    - Buka: `https://api.telegram.org/bot<TOKEN>/getUpdates`
    - Cari `"chat":{"id": XXXXXXX}`
-5. Masukkan token dan chat ID ke `.env`
+5. Masukkan token dan chat ID ke `CONFIG.telegram` di `src/main.js`
 
 ### 3. ImgBB API
 
 1. Daftar di [ImgBB](https://imgbb.com/)
 2. Dapatkan API Key dari dashboard
-3. Masukkan ke `.env` sebagai `VITE_IMGBB_API_KEY`
+3. Masukkan ke `CONFIG.imgbb.apiKey` di `src/main.js`
 
 ### 4. Email Notification (Webmail)
 
@@ -56,38 +69,52 @@ Untuk notifikasi email, Anda bisa menggunakan:
 - **Custom backend** dengan endpoint POST
 - **Formspree** atau layanan serupa
 
-Setup endpoint email di `.env` sebagai `VITE_EMAIL_SERVICE_URL`
+Setup endpoint email di `CONFIG.email.serviceUrl` di `src/main.js`
 
-### 5. Environment Variables
+### 5. Konfigurasi
 
-Copy `.env.example` ke `.env` dan isi semua variabel:
+Edit file `src/main.js` dan ubah bagian `CONFIG`:
 
-```env
-VITE_FIREBASE_API_KEY=xxx
-VITE_FIREBASE_AUTH_DOMAIN=xxx
-VITE_FIREBASE_DATABASE_URL=xxx
-VITE_FIREBASE_PROJECT_ID=xxx
-VITE_FIREBASE_STORAGE_BUCKET=xxx
-VITE_FIREBASE_MESSAGING_SENDER_ID=xxx
-VITE_FIREBASE_APP_ID=xxx
-VITE_TELEGRAM_BOT_TOKEN=xxx
-VITE_TELEGRAM_CHAT_ID=xxx
-VITE_IMGBB_API_KEY=xxx
-VITE_EMAIL_SERVICE_URL=xxx
-VITE_ADMIN_PASSWORD=your_secure_password
+```javascript
+const CONFIG = {
+  firebase: {
+    apiKey: "YOUR_FIREBASE_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  },
+  telegram: {
+    botToken: "YOUR_TELEGRAM_BOT_TOKEN",
+    chatId: "YOUR_TELEGRAM_CHAT_ID"
+  },
+  imgbb: {
+    apiKey: "YOUR_IMGBB_API_KEY"
+  },
+  email: {
+    serviceUrl: "YOUR_EMAIL_SERVICE_URL"
+  },
+  admin: {
+    password: "admin123"  // Ganti password admin
+  }
+};
 ```
 
 ## 🏗️ Development
 
-```bash
-npm install
-npm run dev
-```
-
-## 📦 Build
+Cukup buka `index.html` di browser, atau gunakan local server:
 
 ```bash
-npm run build
+# Dengan Python
+python -m http.server 8000
+
+# Dengan Node.js
+npx serve .
+
+# Dengan PHP
+php -S localhost:8000
 ```
 
 ## 📋 Struktur Database Firebase
@@ -110,7 +137,7 @@ donations/
 ## 🔐 Admin Panel
 
 Akses admin panel melalui tombol gembok di navigasi.
-- Default password: `admin123` (ubah di `.env`)
+- Default password: `admin123` (ubah di CONFIG)
 - Fitur: Approve/Reject donasi, lihat bukti transfer
 
 ## 📱 Telegram Commands
@@ -136,12 +163,14 @@ Format notifikasi:
 
 ## 🛠️ Tech Stack
 
-- React 18 + TypeScript
-- Tailwind CSS v4
-- Firebase Realtime Database
+- HTML5
+- CSS3 (Custom, tanpa framework CSS)
+- JavaScript ES6+ (Vanilla JS, tanpa framework)
+- Firebase Realtime Database (Modular SDK)
 - Telegram Bot API
 - ImgBB API
-- Vite
+- Font Awesome (Icons)
+- Google Fonts (Plus Jakarta Sans & Amiri)
 
 ## 📄 License
 
