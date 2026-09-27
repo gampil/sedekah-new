@@ -5,20 +5,20 @@
 // Configuration (Replace with your actual values)
 const CONFIG = {
   firebase: {
-    apiKey: "YOUR_FIREBASE_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyB6qerNsyshgEjQlpTn5QOW_tCfpah7fIo",
+  authDomain: "itikaf-63482.firebaseapp.com",
+  databaseURL: "https://itikaf-63482-default-rtdb.firebaseio.com",
+  projectId: "itikaf-63482",
+  storageBucket: "itikaf-63482.appspot.com",
+  messagingSenderId: "452451341170",
+  appId: "1:452451341170:web:885f58e689b16bf03b43eb"
   },
   telegram: {
-    botToken: "YOUR_TELEGRAM_BOT_TOKEN",
-    chatId: "YOUR_TELEGRAM_CHAT_ID"
+    botToken: "8874765822:AAFBsrdBoOH6zPAEkAh2MZ8vsmZ3n4aYNf4",
+    chatId: "7414578395"
   },
   imgbb: {
-    apiKey: "YOUR_IMGBB_API_KEY"
+    apiKey: "74a8a5c720111b4162e8e2d237aee552"
   },
   email: {
     serviceUrl: "YOUR_EMAIL_SERVICE_URL"
