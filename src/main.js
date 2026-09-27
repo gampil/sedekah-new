@@ -2,10 +2,6 @@
 // Sedekah Subuh Haramain - Main JavaScript
 // ========================================
 
-// Import Firebase from CDN
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getDatabase, ref, push, onValue, set, get, update } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
-
 // Configuration (Replace with your actual values)
 const CONFIG = {
   firebase: {
@@ -35,9 +31,9 @@ const CONFIG = {
 // Initialize Firebase
 let db = null;
 try {
-  if (CONFIG.firebase.apiKey !== "YOUR_FIREBASE_API_KEY") {
-    const app = initializeApp(CONFIG.firebase);
-    db = getDatabase(app);
+  if (CONFIG.firebase.apiKey !== "YOUR_FIREBASE_API_KEY" && typeof firebase !== 'undefined') {
+    firebase.initializeApp(CONFIG.firebase);
+    db = firebase.database();
     console.log('✅ Firebase initialized');
   } else {
     console.warn('⚠️ Firebase not configured - using demo mode');
@@ -237,9 +233,9 @@ async function handleDonation(event) {
 
     // Save to Firebase
     if (db) {
-      const donationsRef = ref(db, 'donations');
-      const newRef = push(donationsRef);
-      await set(newRef, donation);
+      const donationsRef = db.ref('donations');
+      const newRef = donationsRef.push();
+      await newRef.set(donation);
 
       // Send Telegram notification
       const telegramMessage = 
@@ -320,9 +316,9 @@ function loadDonations() {
     return;
   }
 
-  const donationsRef = ref(db, 'donations');
+  const donationsRef = db.ref('donations');
   
-  onValue(donationsRef, (snapshot) => {
+  donationsRef.on('value', (snapshot) => {
     const data = snapshot.val();
     
     if (!data) {
@@ -428,9 +424,9 @@ function loadAdminDonations() {
     return;
   }
 
-  const donationsRef = ref(db, 'donations');
+  const donationsRef = db.ref('donations');
   
-  onValue(donationsRef, (snapshot) => {
+  donationsRef.on('value', (snapshot) => {
     const data = snapshot.val();
     const listBody = document.getElementById('adminDonationList');
     
@@ -511,11 +507,11 @@ async function approveDonation(donationId) {
   if (!db) return;
 
   try {
-    const donationRef = ref(db, `donations/${donationId}`);
-    const snapshot = await get(donationRef);
+    const donationRef = db.ref(`donations/${donationId}`);
+    const snapshot = await donationRef.once('value');
     const donation = snapshot.val();
 
-    await update(donationRef, { status: 'approved' });
+    await donationRef.update({ status: 'approved' });
 
     // Send Telegram notification
     const message = 
@@ -537,11 +533,11 @@ async function rejectDonation(donationId) {
   if (!db) return;
 
   try {
-    const donationRef = ref(db, `donations/${donationId}`);
-    const snapshot = await get(donationRef);
+    const donationRef = db.ref(`donations/${donationId}`);
+    const snapshot = await donationRef.once('value');
     const donation = snapshot.val();
 
-    await update(donationRef, { status: 'rejected' });
+    await donationRef.update({ status: 'rejected' });
 
     // Send Telegram notification
     const message = 
